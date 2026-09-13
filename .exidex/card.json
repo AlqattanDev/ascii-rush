@@ -1,0 +1,21 @@
+{
+  "slug": "ascii-rush",
+  "title": "ASCII RUSH",
+  "tagline": "An endless runner drawn entirely in text. The last train left without you; run the city after dark, ride the train roofs, bank the coins.",
+  "kind": "game",
+  "platform": "both",
+  "entry": "/ascii-rush/play/",
+  "showcase": "public",
+  "repo": "https://github.com/AlqattanDev/ascii-rush",
+  "order": 11,
+  "hidden": false,
+  "tags": ["endless runner", "ascii", "canvas", "single file", "no dependencies"],
+  "accent": "#F5C86B",
+  "thumb": "/ascii-rush/thumb.png",
+  "screenshots": [
+    "/ascii-rush/thumb.png",
+    "/ascii-rush/shots/desktop-title.png",
+    "/ascii-rush/shots/phone.png",
+    "/ascii-rush/shots/shop.png"
+  ]
+}

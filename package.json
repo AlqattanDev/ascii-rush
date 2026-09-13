@@ -1,0 +1,10 @@
+{
+  "name": "ascii-rush",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A mobile-first ASCII endless runner. The last train left without you; run the city after dark.",
+  "repository": { "type": "git", "url": "https://github.com/AlqattanDev/ascii-rush.git" },
+  "scripts": {
+    "build:showcase": "mkdir -p .exidex/play && cp index.html .exidex/play/index.html"
+  }
+}

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" style="--accent:#F5C86B">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ASCII RUSH — run the city after dark</title>
+    <meta
+      name="description"
+      content="An endless runner drawn entirely in text. Three lanes, train roofs, a locker and a bank, in one HTML file with no dependencies."
+    />
+    <link rel="stylesheet" href="/_showcase/style.css" />
+    <style>
+      body { margin: 0; font: 16px/1.6 system-ui, sans-serif; }
+      .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+      .play-link { display: inline-flex; min-height: 48px; align-items: center; padding: 0 22px; border-radius: 999px; background: #F5C86B; color: #14171F; font-weight: 700; text-decoration: none; }
+      .repo-link { display: inline-flex; min-height: 48px; align-items: center; padding: 0 20px; border-radius: 999px; border: 1px solid rgba(245, 200, 107, 0.5); color: #F5C86B; font-weight: 600; text-decoration: none; }
+      .play-note { margin: 8px 0 0; font-size: 13px; color: rgba(255,255,255,0.5); }
+      body.rush-landing .sc-window { max-width: 1440px; }
+      body.rush-landing .sc-body { max-width: none; overflow-x: clip; }
+      .rush-hero { margin: 0 0 38px; background: var(--paper); border: 3px solid var(--ink); box-shadow: 3px 7px 0 #493222; }
+      body.rush-landing .rush-hero img { display: block; width: 100%; max-width: none; height: min(43vw, 520px); object-fit: cover; border: 0; filter: grayscale(1) contrast(1.3); mix-blend-mode: multiply; }
+      .rush-copy { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 16px 40px; }
+      .rush-copy .sc-kicker, .rush-copy .sc-title { grid-column: 1; margin: 0; }
+      .rush-copy .sc-tagline { grid-column: 1; }
+      .rush-copy > p:not([class]) { grid-column: 2; grid-row: 1 / 4; align-self: center; }
+      .rush-copy .sc-pills { grid-column: 2; grid-row: 4; }
+      .rush-copy .actions, .rush-copy .play-note { grid-column: 1 / -1; }
+      @media(max-width: 700px) { .rush-copy { display: block; } .rush-copy > * { margin-top: 18px !important; } body.rush-landing .rush-hero img { height: 58vw; } }
+    </style>
+  </head>
+  <body class="sc-desk rush-landing">
+    <main class="sc-window">
+      <header class="sc-titlebar">
+        <div class="sc-titlebar-dots"><span></span></div>
+        <span class="sc-titlebar-name">ascii-rush.game</span>
+        <div class="sc-titlebar-end">
+          <span class="sc-accent-dot" aria-hidden="true"></span>
+          <a class="sc-close" href="https://exidex.dev/" aria-label="Back to exidex.dev">×</a>
+        </div>
+      </header>
+      <div class="sc-body">
+        <figure class="rush-hero" data-sc-tilt><img src="thumb.png?w=1200" alt="Mid-run down a three-lane road of text, coins ahead, neon towers on both sides" /></figure>
+        <div class="rush-copy">
+        <p class="sc-kicker">Game · Endless runner</p>
+        <h1 class="sc-title">ASCII RUSH</h1>
+        <p class="sc-tagline">The last train left without you. Run the city after dark, ride the train roofs, bank the coins.</p>
+        <div class="sc-pills">
+          <span class="sc-pill">Drawn in text</span>
+          <span class="sc-pill">Swipe or keys</span>
+          <span class="sc-pill">Locker and bank</span>
+          <span class="sc-pill">One file, no deps</span>
+        </div>
+        <p>Every frame is characters on a canvas, projected with a real camera so the road has depth and the towers throw light and shadow. Three lanes, jumps, slides and ramps onto the train roofs; coins mark the safe line. Survive and the coins bank for skins and upgrades. The whole game is one HTML file with no dependencies, built to run at full speed on a landscape phone.</p>
+
+        <div class="actions">
+          <a class="play-link" href="./play/">▶ Play in browser</a>
+          <a class="repo-link" href="/games">More games</a>
+        </div>
+        <p class="play-note">Swipe on a phone. WASD or arrows on a keyboard, Space to jump, P to pause. Progress saves on this device.</p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
