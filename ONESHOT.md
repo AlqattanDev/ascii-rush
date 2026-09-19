@@ -1,61 +1,83 @@
-# Build ASCII RUSH — a city made of type
+# ASCII RUSH: GPT-6 one-shot build
 
-Build a complete, replayable endless runner whose game world is rendered entirely through characters. The last train left without you. Run the city after dark, take the roofs, collect the coins and come back for another attempt.
+You are GPT-6, responsible for the complete game, its renderer and its visual identity. Build a polished endless runner through a night city rendered entirely as characters. Deliver a complete playable product: title, run, loss, restart, locker, progression and settings. A striking still image is not enough.
 
-This is an autonomous implementation assignment. Own the decisions, build the game, play it, find what feels wrong and improve it before handing it over. Choose the implementation freely. In an existing checkout, preserve useful code and unrelated work; in an empty checkout, build the whole product from this brief. Do not stop at an architecture document or a title screen.
+Make ordinary decisions autonomously and continue through implementation, playing, visual refinement and fixes without incremental approval requests. Use suitable tools. Preserve working systems and unrelated work in an existing checkout; in an empty project, this document is the whole-game brief. The compact, self-contained experience matters more than a particular file count or graphics API.
 
-## The one visual promise
+## 1. The promise
 
-The road, buildings, train roofs, obstacles, runner, pickups and effects resolve into glyphs in the final game image. Internal geometry, lighting or intermediate render targets are implementation choices; the visible world must remain a city made of type, not conventional graphics with a small ASCII overlay.
+The last train left without you. Run the city after dark. Dodge the street obstacles, climb the ramps, run along train roofs and bank enough coins to return in another silhouette.
 
-Make characters carry depth, shape and light. A dark road should be visually quiet, the runner's silhouette unmistakable, obstacles readable before contact, and lamps and signs distinct from collectible coins. Perspective, parallax, shadows and atmosphere should make the city feel substantial. More glyph noise is not more detail.
+The game is three-lane, immediate and thumb-driven. Its defining visual rule is equally simple: **the final game world is made of glyphs**. Roads, runner, trains, obstacles, buildings, lights and effects must resolve into characters. Geometry and lighting may exist underneath, as they already do in the source; an ordinary 3D game with a small text overlay does not satisfy the brief.
 
-Aim for a striking night-city composition that remains readable during an ordinary run. Every skin must have a recognizable silhouette. A cinematic screenshot is not success if the player cannot tell a low beam from a jumpable barrier.
+It should look like a city made of type, not a terminal filled with random symbols.
 
-## The run
+## 2. Build a deliberate ASCII image
 
-Three lanes with immediate left/right swipes, up to jump and down to slide. Provide the equivalent keyboard controls: arrows or WASD, Space for jump and a pause key. One gesture should produce one intended action rather than accidental chained moves.
+**Composition and depth.** Use a coherent chase perspective with a strong vanishing point and the runner clearly separated in the near foreground. Three usable lanes must remain apparent. Curbs, streetlamps, façades, elevated train roofs and distant towers provide different depth layers and rates of motion. A roof should visibly sit above the street, and its ramp should read as a climb before the player reaches it.
 
-The route combines hurdles, low gates, full-height obstacles and trains with ramps leading onto their roofs. Running above street level is a real alternative route, with correct height, support and landing behavior—not a decorative jump animation over an unchanged collider. Jumping and sliding must solve visibly different problems.
+Keep the immediate road quiet. Concentrate architectural detail into the middle distance and sides: projecting awnings, recessed storefronts, window grids with selective lighting, cornices, rooftop equipment, signs and lamp arms. Vary building mass and height while keeping a believable street rhythm. Do not let random tall noise replace authored silhouette. The city should feel dense beyond the route without covering the lane entrances.
 
-Introduce the vocabulary through the first few patterns. Coins suggest a viable line and teach timing without requiring a manual. Escalate by combining learned situations, adding meaningful route choices and increasing pressure. Give the player opportunities to recover between demanding patterns; difficulty should not be indistinguishable from unreadable clutter.
+**Glyph treatment.** Choose a consistent character family and intentional relationships between sparse marks, middle-density forms and dense highlights. Preserve clear local contrast: the sky and road can use sparse or dark marks; lit windows and edges can carry stronger glyphs. Characters should remain sharp rather than being stretched into fuzzy rectangular pixels. Their density must describe form and illumination, not fluctuate arbitrarily on every frame.
 
-Generate challenges that are reachable at the current speed and with the actual lane-change, jump and slide timings. A free lane is not a fair escape if there is no time to get there. Keep collision shapes and heights consistent with what the glyph renderer shows. Make an eventual loss understandable enough that retrying feels like a new chance, not another roll of the dice.
+A runner, hurdle, low gate, wall, train and coin must each survive the character conversion as a distinct silhouette. Check the smallest gameplay representation, not only a close-up before the post-process. Give hazardous edges enough contrast and thickness to remain legible in motion. A technically complete glyph shader that erases the difference between jump and slide is a failed renderer.
 
-## Pickups and progression
+**Color and light.** Build around blue-black and slate streets, muted teal architecture, selective cyan/magenta signage and warm gold collectible highlights. The source's warm title/button color can carry through coins and rewards. Use spatially coherent light pools and dark sides to give objects volume. Highlight windows selectively; an entire façade uniformly glowing is not a richer city.
 
-Magnet, double coins and temporary flight are road pickups. Make activation, remaining duration and expiry readable without covering the track. Flight needs a safe, understandable return to ordinary running; expiry must not drop the player into an unavoidable obstacle.
+Weather changes may introduce rain streaks, haze or stronger road reflections, but all remain expressed through the glyph image and leave obstacles readable. Fog should reduce distant detail, not remove necessary reaction distance. Rain must not resemble falling collectible coins. Avoid a full-screen neon wash that makes every material the same luminous surface.
 
-Track run score, distance and coins separately. Bank collected run coins when an attempt ends or the player deliberately exits through the pause menu. Credit them exactly once. Death does not introduce an unannounced loss of unbanked coins: that was an error in the earlier prompt, not the current game's economy.
+**Motion clarity.** Keep character sampling stable enough to prevent distracting crawl and shimmer. Preserve the runner's head, torso and legs through running, jumping and sliding. Use parallax and coherent travel speed to produce momentum rather than smearing the image with blur. Landing can produce a compact impact and brief pose compression. Lateral movement should lean or shift decisively, then settle; it should not look like a static icon being dragged sideways.
 
-The locker offers the original runner, robot and ninja, plus a permanent longer-powerups upgrade. Purchases should visibly change the next run. Show owned, equipped, affordable and unaffordable states clearly. Keep bank, purchases, equipment, best score, best distance and preferences on the device; reopening the page should not charge for something already owned.
+The default Runner, Robot and Ninja need distinct readable forms. Robot can emphasize an angular head and mechanical stride; Ninja a different head/torso silhouette and a restrained trailing shape. They must remain identifiable after glyph conversion, not only in the shop preview. These are visual treatments of the existing skins, not extra character classes.
 
-Choose sensible prices and progression pacing. Make the first desirable purchase attainable through ordinary play, while leaving a reason to return. The run remains a skill game rather than a shop with a runner attached.
+## 3. Make the street teach its actions
 
-## Complete product flow
+Swipe left/right for one lane change, up to jump and down to slide. Support arrows/WASD, Space and pause on desktop. One gesture produces one intentional action, with clean pointer cancellation and no page scrolling during play.
 
-Title → immediate run → pause/resume or loss → clear result → quick restart or locker → another run. A pause freezes gameplay and temporary effects. Returning from a hidden tab or a phone lock must not advance a giant frame and kill the player before they can react.
+Hurdles ask for a jump, gates for a slide, full-height walls for a lane change. Trains provide ramps and a physically higher running surface. Roof entry, roof travel, stepping off, airborne movement and return to ground must agree with the visible geometry. Do not simulate a roof merely by lifting the sprite while keeping the street collider.
 
-Use phone-safe layouts and large controls without letting HUD panels consume the road. Landscape phone and desktop are important; adapt gracefully to other aspect ratios. Keep the page from scrolling during play and release pointer state correctly when a gesture is cancelled. Include sound with a real mute, reduced-motion treatment, and an understandable notice when local storage is unavailable.
+Use a few generous opening patterns to teach the vocabulary, then combine it into more demanding sequences. Coins trace useful paths and arcs. A coin line should not quietly guide a learner into an impossible jump. Mix focused sequences with quiet connectors, rather than filling every moment with obstacles.
 
-The original fits in one self-contained HTML file. Preserve the benefit—fast access, no account, no unnecessary services, straightforward hosting—without making file count or framework choice the challenge. The shipped game should not need a developer to assemble missing assets before it becomes playable.
+Generate patterns reachable with the actual lane-change duration, speed, jump arc and slide window. An open lane is not a viable escape when it takes longer to reach than the remaining reaction time. Difficulty can increase with speed and combinations, but the image must still provide enough information to respond. Avoid inventing extra obstacle types before the existing four are visually and mechanically distinct.
 
-## Prove the run, not just the renderer
+## 4. The guard, pickups and scoring
 
-Exercise lane changes in both directions, jump and slide collisions, ramp entry, rooftop travel, falling or stepping back to the road, and every power-up's expiry. Inspect a demanding late-run pattern at real speed, not only a slowed debug scene. Check generated sequences for practical escape paths.
+Preserve the source's two kinds of loss. A direct major collision ends the attempt. A glancing lane-change collision can cause a stumble: the runner slows briefly and the guard is close for five seconds. Stay clean to recover; stumble again in that window and the guard catches up. Give recovery a visible and audible beginning and end. This is not a hidden multi-hit health bar.
 
-Finish and exit attempts with known coin totals; verify that restart, title navigation and refresh cannot bank the same attempt twice. Buy and equip every locker item, reload, and confirm persistence and insufficient-funds behavior. Test pause, pointer cancellation, orientation changes and storage failure.
+The guard's increased pressure should read from a restrained approaching silhouette, cue and warning, without obscuring the next obstacle. A crash and a catch receive different short ending beats. The player should understand which error ended the attempt.
 
-Use the actual rendered game to inspect glyph clarity and input response. Report frame-rate or device claims only for hardware and settings actually tested. Automated runs can expose unreachable patterns; they cannot establish that a thumb gesture feels good.
+Road pickups are **Magnet, Double and Jetpack**. Magnet pulls reachable coins toward the runner. Jetpack visibly lifts them above the track, permits lane changes and creates an airborne collection opportunity. Its expiry gives the existing safe-landing grace period and clear feedback so the return is understandable rather than an unavoidable crash. Pickup duration is six seconds before the permanent two-second extension. Show remaining duration compactly.
 
-## Deliver
+For this brief, label Double accurately as **Double Score**: the current implementation doubles distance-score gain and coin-score value, while each collected coin still adds one coin to the bank. It is not a bank-currency multiplier. Keep UI, instructions and behavior consistent.
 
-Leave a directly runnable game, short controls and run instructions, and a factual handoff naming what was tested and what remains unverified. Iterate on readability, rhythm and the first restart before spending effort on peripheral features.
+Track score, run distance, collected coins, best score and best distance separately. Bank the attempt's coins when it ends or when the player deliberately leaves through the pause/title path. Credit the attempt exactly once. Death does not erase those coins. The source economy is not an extraction game.
 
-**Finish when the city looks unmistakably like text, plays unmistakably like a runner, and the next attempt is one tap away.**
+## 5. The presentation outside the run
+
+**Title.** A real ASCII wordmark, a composed live city view and one obvious start action. The background can show a quiet section of the real rendered route, not a promotional image implying graphics the game cannot deliver. Keep the message short and the playable world visible. Use monospaced typography with a deliberate hierarchy rather than making every label the same size.
+
+**HUD.** Score, coins, distance, temporary power state and pause in a compact arrangement. Dark-backed readouts can protect contrast, but must not occupy the reaction corridor. Keep the first obstacle, runner and active warning visible together. Avoid large opaque panels drifting over the middle lane.
+
+**Locker.** Show all three silhouettes through clear character previews and obvious owned/equipped/affordable states. Preserve the original free Runner, Robot at 50 coins, Ninja at 100, and the 100-coin longer-powerups upgrade as the initial economy. A purchase visibly affects the next run. No fake purchase-success message when the bank is insufficient.
+
+**Results.** A concise scorecard with the real ending cause, score, distance, collected/banked coins and records. Restart is immediate and prominent. A new record earns restrained emphasis, not a celebration that delays the next attempt. Pause genuinely freezes gameplay and temporary effects; resume restores control without an accidental swipe.
+
+Use synthesized or properly sourced sound that belongs to this compact arcade night: rhythmic footsteps, jump/slide/landing, crisp pickups, distinctive power activation, guard pressure and crash. Avoid a high-volume identical beep for every event. Include mute and reduced motion. Persist bank, ownership, equipped skin, records and settings; explain unavailable storage without falsely promising permanence.
+
+## 6. What completion requires
+
+Play the complete title/run/pause/loss/restart/locker loop. Exercise every obstacle, rooftop transition and pickup, a first stumble, five-second recovery, a second stumble catch, a crash and safe Jetpack expiry. Check banking after both loss and deliberate quit, repeated result navigation, purchasing, reloading and storage failure. Hidden-tab return or a phone lock must not advance an enormous frame into instant death.
+
+Inspect actual rendered frames from an opening street, a dense late-run pattern, the top of a train, each skin, active flight and the result screen. At normal speed and actual display size, identify the runner, next threat and usable response without squinting. Check glyph sharpness, color hierarchy, sampling stability and weather readability. A slower diagnostic scene does not prove late-run visibility.
+
+Optimize the renderer's decorative cost before shortening warning distance or changing collision rules. Report performance for tested hardware, settings and rendering mode only. Desktop measurements are not phone measurements.
+
+Deliver a self-contained runnable game, short startup/control instructions and factual verification notes. Use real input paths as well as deterministic diagnostics. Do not claim a generated pattern is fun merely because a bot survived it.
+
+**The standard: a sharp city made of type, a runner with readable movement, fair mistakes and a next attempt that is one tap away.**
 
 ---
 
-### Repository alignment
+### Source basis and target distinction
 
-Based on `.exidex/content.md` and `index.html`, reviewed 2026-09-19. Source code explicitly states that coins bank when a run finishes or is left; `bank()` guards against duplicate credit. The shop includes Runner, Robot, Ninja and longer power-ups. Fair-pattern, expiry and lifecycle scenarios above strengthen the build requirements and are not a claim that this editing session executed gameplay tests.
+Grounded in `index.html`, including its glyph renderer, pattern generator, `stumble`, `activate`, `tick`, `bank` and result flow, plus `.exidex/content.md`. The source code establishes five-second stumble recovery, six/eight-second pickups, two-second landing protection and banking on both crash/catch and exit. Marketing calls the multiplier “double coins,” but `tick` doubles score rather than `runCoins`; this brief explicitly preserves that executable behavior and names it accurately. Detailed model, lighting and motion treatment above is the new visual target, not a claim of runtime inspection in this rewrite.
